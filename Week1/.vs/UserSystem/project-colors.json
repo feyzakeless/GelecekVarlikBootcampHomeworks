@@ -1,0 +1,11 @@
+{
+  "Version": 1,
+  "ProjectMap": {
+    "b3c60ecf-e01b-43ef-8c7d-2ee1d50f6999": {
+      "ProjectGuid": "b3c60ecf-e01b-43ef-8c7d-2ee1d50f6999",
+      "DisplayName": "UserSystemApi",
+      "ColorIndex": 0
+    }
+  },
+  "NextColorIndex": 1
+}
