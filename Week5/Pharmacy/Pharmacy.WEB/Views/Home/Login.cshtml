@@ -1,0 +1,30 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+<div class="login-wrapper d-flex justify-content-center flex-wrap w-100">
+    <div class="login-body p-4 w-25 mt-5 mb-5">
+        <div class="form-title">Login</div>
+        <!--Home controllerdaki Login işleminin post methodu-->
+        <form method="post" asp-controller="Home" asp-action="Login" class="w-100">
+            <div class="mb-3">
+                <label for="Email" class="form-label">Email</label>
+                <input name="email" type="text" class="form-control" id="email" aria-describedby="emailHelp">
+            </div>
+
+            <div class="mb-3">
+                <label for="Password" class="form-label">Password</label>
+                <input type="password" name="password" class="form-control" id="Password">
+                <div id="emailHelp" class="form-text">We'll never share your password with anyone else.</div>
+            </div>
+
+            <button type="submit" class="btn btn-primary">Log In</button> <!--Formu submit ediyoruz-->
+        </form>
+        <div class="register-text w-100 text-center mt-2">
+            <!--User controllerdaki InsertUser'a istek atiyoruz-->
+            Eğer hesabınız yoksa kayıt için lütfen <a asp-controller="User" asp-action="InsertUser">tıklayınız.</a>
+        </div>
+    </div>
+</div>
+

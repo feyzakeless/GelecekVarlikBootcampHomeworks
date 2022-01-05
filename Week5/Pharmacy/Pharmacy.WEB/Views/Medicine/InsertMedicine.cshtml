@@ -1,0 +1,47 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+
+<div class="product-list-wrapper w-75 m-auto">
+    <div class="page-title mb-3">
+        <h1>Medicine Adding Form</h1>
+    </div>
+    <!--Medicine controllerdaki InsertMedicine işleminin post methodu-->
+    <form method="post" asp-controller="Medicine" asp-action="InsertMedicine" class="insert-form p-4">
+
+        <div class="mb-3">
+            <label for="Name" class="form-label">Medicine Name</label>
+            <input name="name" type="text" class="form-control" id="name" aria-describedby="authorizedIdHelp">
+        </div>
+
+        <div class="mb-3">
+            <label for="TicketCode" class="form-label">Medicine Ticket Code</label>
+            <input type="text" name="ticketCode" class="form-control" id="ticketCode">
+        </div>
+
+        <div class="mb-3">
+            <label for="Description" class="form-label">Medicine Description</label>
+            <input type="text" name="description" class="form-control" id="description">
+        </div>
+
+        <div class="mb-3">
+            <label for="Price" class="form-label">Medicine Price</label>
+            <input type="text" name="price" class="form-control" id="price">
+        </div>
+
+        <div class="mb-3">
+            <label for="Stock" class="form-label">Medicine Stock</label>
+            <input type="text" name="stock" class="form-control" id="stock">
+        </div>
+
+        <div class="mb-3">
+            <label for="Iuser" class="form-label">Medicine IUser</label>
+            <input type="text" name="iuser" class="form-control" id="iuser">
+        </div>
+        <div class="button-wrapper d-flex justify-content-end mt-4">
+            <button type="submit" class="btn btn-primary">Insert Medicine</button> <!--Formu submit ediyoruz-->
+        </div>
+    </form>
+</div>

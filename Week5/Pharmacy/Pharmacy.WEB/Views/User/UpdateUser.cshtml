@@ -1,0 +1,40 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+
+@model Pharmacy.Model.ModelUser.UserViewModel
+
+<div class="update-wrapper w-75 m-auto">
+     <div class="page-title mb-3">
+        <h1>My Account</h1>
+    </div>
+    <form method="post" asp-controller="User" asp-action="UpdateUser" class="update-form p-4">
+        @Html.HiddenFor(model => model.Id)
+        <div class="mb-3">
+            <label for="AuthorizeId" class="form-label">AuthorizeId</label>
+            <input name="AuthorizeId" type="text" class="form-control" id="authorize-id" value="@Model.AuthorizeId">
+        </div>
+
+        <div class="mb-3">
+            <label for="Name" class="form-label">Name</label>
+            <input type="text" name="Name" class="form-control" id="name" value="@Model.Name">
+        </div>
+
+        <div class="mb-3">
+            <label for="Surname" class="form-label">Surname</label>
+            <input type="text" name="Surname" class="form-control" id="surname" value="@Model.Surname">
+        </div>
+
+        <div class="mb-3">
+            <label for="Email" class="form-label">Email</label>
+            <input type="text" name="Email" class="form-control" id="price" value="@Model.Email" disable>
+        </div>
+
+        <div class="button-wrapper d-flex justify-content-end mt-4">
+            <button type="submit" class="btn btn-primary">Update</button>
+        </div>
+    </form>
+</div>
+

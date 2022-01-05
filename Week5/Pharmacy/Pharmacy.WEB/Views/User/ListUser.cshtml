@@ -1,0 +1,59 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+
+@model IEnumerable<Pharmacy.Model.ModelUser.UserViewModel>
+
+@{
+    ViewBag.Title = "Pharmacy";
+}
+
+<div class="product-list-wrapper w-75 m-auto">
+    <table class="table table-bordered table-striped">
+        <thead class="thead-dark">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.AuthorizeId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Surname)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Email)
+            </th>
+        </tr>
+        </thead>
+        <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                @Html.HiddenFor(modelItem => item.Id)
+                <td>
+                    @Html.DisplayFor(modelItem => item.AuthorizeId)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Surname)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Email)
+                </td>
+            </tr>
+        }
+        </tbody>
+    </table>
+</div>
+<script type="text/javascript">
+    let thElement = document.querySelectorAll("table thead th");
+    thElement.forEach(item => item.classList.add("align-middle"));
+    let tdElement = document.querySelectorAll("table tbody td");
+    tdElement.forEach(item => item.classList.add("align-middle"));
+</script>
+

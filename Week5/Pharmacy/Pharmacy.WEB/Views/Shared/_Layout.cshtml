@@ -1,0 +1,245 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - Pharmacy.WEB</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400&display=swap" rel="stylesheet">
+</head>
+@{
+    var userName = ViewBag.Name;
+    var cache = ViewBag.Cache;
+}
+<body>
+    <header>
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+            <div class="container">
+                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">
+                    <img src="~/img/pharmacylogo.png" alt="site-logo"/>
+                </a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="left-side d-flex justify-content-end align-center text-center">
+                    @if(cache == 3)//Doktor ise
+                    {
+                        <div class="user-list mr-4">
+                            <a asp-controller="User" asp-action="ListUser">Users</a>
+                        </div>
+                    }
+                    @if(userName is not null)
+                    {
+                        <div class="check-user-wrapper">
+                            <div class="user-icon"><i class="far fa-user"></i></div>
+                            <div class="user-dropdown">
+                                <span></span>
+                                <div class="user-name">@userName</div>
+                                <div class="logout-btn"><a asp-controller ="Home" asp-action="RemoveCacheData"><i class="fas fa-sign-out-alt"></i>LogOut</a></div>
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+        </nav>
+    </header>
+    <div class="container-fluid">
+        <main role="main" class="pb-3">
+            @RenderBody()
+        </main>
+    </div>
+
+    <footer class="border-top footer text-muted">
+        <div class="container">
+            &copy; 2021 - Pharmacy.WEB 
+        </div>
+    </footer>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    @*<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" 
+        integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" 
+        crossorigin="anonymous" referrerpolicy="no-referrer">
+    </script>*@
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>
+<style>
+    body{
+        font-family: 'Poppins', sans-serif;
+    }
+    .navbar-brand img{
+        max-height:85px;
+    }
+    .left-side .user-list a{
+        color: #818285;
+        font-size: 18px;
+        font-weight: 500;
+    }
+    .check-user-wrapper{
+        position:relative;
+    }
+    .check-user-wrapper .user-icon i{
+        font-size:24px;
+        color: #818285;
+        cursor:pointer;
+    }
+    .check-user-wrapper:hover .user-icon i{
+        font-size:24px;
+        color:#ff6a00;
+    }
+    .check-user-wrapper .user-dropdown{
+        display:none;
+        font-weight: 400;
+        background-color: #fff;
+        box-shadow: 0 3px 10px 0 rgb(0 0 0 / 7%);
+        border: solid 1px #e6e6e6;
+        border-radius: 6px;
+        position: absolute;
+        z-index: 999;
+        right: -90px;
+        width: 196px;
+        height: auto;
+        top: 40px;
+        padding: 10px;
+    }
+    .check-user-wrapper:hover .user-dropdown{
+        display:block;
+    }
+    .check-user-wrapper .user-dropdown::before{
+        content: "";
+        width: 100%;
+        height: 30px;
+        top: -30px;
+        left: 0;
+        position: absolute;
+    }
+    .check-user-wrapper:hover .user-dropdown span{
+        width: 15px;
+        height: 15px;
+        -ms-transform: rotate(45deg);
+        -webkit-transform: rotate( 
+    45deg);
+        transform: rotate( 
+    45deg);
+        position: absolute;
+        top: -9px;
+        left: calc(50% - 9px);
+        background-color: #fff;
+        border-left: solid 1px #e6e6e6;
+        border-top: solid 1px #e6e6e6;
+    }
+    .check-user-wrapper:hover .user-dropdown .logout-btn a {
+        color: #212529;
+    }
+    .check-user-wrapper:hover .user-dropdown .logout-btn:hover a{
+        color:#ff6a00;
+        text-decoration: auto;
+    }
+    .check-user-wrapper:hover .user-dropdown .logout-btn i{
+        margin-right:10px;
+    }
+    .container-fluid{
+        position:relative;
+    }
+    form.update-form,
+    form.insert-form{
+        border: 1px solid #dee2e6;
+        background-color:#dee2e6;
+    }
+    .login-wrapper,
+    .signup-wrapper{
+        background-image:url(https://www.principle-pharmacy.com/wp-content/uploads/2020/11/Untitled-11.jpg);
+        background-repeat: no-repeat;
+        background-position: center;
+    }
+    .login-wrapper .login-body,
+    .signup-wrapper .signup-body{
+        background-color: rgb(0 0 0 / 75%);
+        border-radius: 8px;
+        margin: auto;
+        box-shadow: rgb(0 0 0 / 50%) 0px 5px 15px;
+    }
+    .login-wrapper .form-title,
+    .signup-wrapper .form-title{
+        text-align: center;
+        font-size: 4rem;
+        font-weight: 600;
+        padding-bottom: 15px;
+        color: #fff;
+    }
+    .login-wrapper button,
+    .signup-wrapper button{
+        width:100%;
+    }
+    .login-wrapper label,
+    .login-wrapper .form-text,
+    .login-wrapper .register-text,
+    .signup-wrapper label,
+    .signup-wrapper .form-text,
+    .signup-wrapper .register-text{
+        color:#fff;
+    }
+    .login-wrapper .register-text a,
+    .signup-wrapper .register-text a{
+        color:#ff6a00;
+    }
+    .signup-wrapper .auth-wrapper .desc{
+        border-radius:0.25rem;
+        color:#fff;
+    }
+    .signup-wrapper .auth-wrapper .desc p{
+        margin:0;
+    }
+    table .btn-refreshing{
+        border: 1px solid #80808075;
+        background-color:#fff;
+    } 
+    table .btn-refreshing i{
+        color: #2d15f6;
+        font-size: 20px;
+    }
+    table tr th,
+    table tr td{
+        text-align: center;
+    }
+    .table-striped tbody tr:nth-of-type(odd) {
+        background-color: #dee2e6;
+    }
+    .table-striped tbody tr:nth-of-type(odd) td{
+        border-right-color:#fff;
+    }
+    .table-striped tbody tr:nth-of-type(odd) td:last-child{
+        border-right-color:inherit;
+    }
+    .tooltip {
+      position: relative;
+      display: inline-block;
+      border-bottom: 1px dotted black;
+    }
+
+    .tooltip .tooltiptext {
+      visibility: hidden;
+      width: 120px;
+      background-color: black;
+      color: #fff;
+      text-align: center;
+      border-radius: 6px;
+      padding: 5px 0;
+
+      /* Position the tooltip */
+      position: absolute;
+      z-index: 1;
+    }
+
+    .tooltip:hover .tooltiptext {
+      visibility: visible;
+    }
+</style>
+
+

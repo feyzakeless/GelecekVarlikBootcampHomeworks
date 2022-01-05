@@ -1,0 +1,122 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+
+@model IEnumerable<Pharmacy.Model.ModelMedicine.ListMedicineViewModel>
+
+@{
+    ViewBag.Title = "Pharmacy";
+    var authorizeId = ViewBag.Cache; <!--Cacheden authorizeId yi aldık,yetki kontrolu icin-->
+}
+
+<div class="product-list-wrapper w-75 m-auto">
+    @if (authorizeId == 2) //Eğer eczacı değilse ekleme yapamaz
+    {
+        <div class="insert-button-wrapper d-flex justify-content-end mb-3">
+         <!--Medicine controllerdaki InsertMedicine'a istek atiyoruz-->
+            <a class="insert-medicine-button btn btn-success" asp-action="InsertMedicine" asp-controller="Medicine">+ Insert Medicine</a>
+        </div>
+    }
+    <table class="table table-bordered table-striped">
+        <thead class="thead-dark">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TicketCode)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Description)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Price)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Stock)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Iuser)
+            </th>
+            @if (authorizeId == 2) //Eğer eczacı değilse güncelleme silme yapamaz
+            {
+                <th>Güncelle</th>
+                <th>Sil</th>
+            }
+        </tr>
+        </thead>
+        <tbody>
+        @foreach (var item in Model) //modeldeki verileri dondurduk
+        {
+            <tr>
+                @Html.HiddenFor(modelItem => item.Id)
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TicketCode)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Description)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Price)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Stock)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Iuser)
+                </td>
+                @if (authorizeId == 2) //Eğer eczacı değilse güncelleme silme yapamaz
+                {
+                    <td>
+                        <!--Medicine controllerdaki UpdateMedicine'a istek atiyoruz-->
+                        <a class="btn btn-refreshing" data-toggle="tooltip" data-placement="bottom" title="Ürünü Güncelle" asp-action="UpdateMedicine" asp-controller="Medicine" asp-route-id="@item.Id" >
+                            <i class="fas fa-sync-alt"></i>
+                        </a>
+                    </td>
+                    <td>
+                        <!--Medicine controllerdaki DeleteMedicine'a istek atiyoruz-->
+                        <a class="btn btn-danger btn-delete" data-toggle="tooltip" data-placement="bottom" title="Ürünü Sil" asp-action="DeleteMedicine" asp-controller="Medicine" asp-route-id="@item.Id">
+                            <i class="fas fa-trash-alt"></i>
+                        </a>
+                    </td>
+                }
+            </tr>
+        }
+        </tbody>
+    </table>
+</div>
+<div class="modal fade" id="delete-medicine-modal">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">x</button>
+            </div>
+            <div class="modal-body">
+                <div class="warning">Are you sure you want to delete this medicine?</div>
+            </div>
+            <div class="modal-footer">
+                <button type="submit" class="btn btn-danger btn-modal-delete">Delete</button>
+                <button type="button" class="btn btn-close">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript"> 
+    
+    let thElement = document.querySelectorAll("table thead th");
+    thElement.forEach(item => item.classList.add("align-middle"));
+    let tdElement = document.querySelectorAll("table tbody td");
+    tdElement.forEach(item => item.classList.add("align-middle"));
+
+    $(document).ready(function(){
+        $(".btn-delete").click(function(){
+            $("#delete-medicine-modal").modal("show");
+        });
+    });
+</script>
+

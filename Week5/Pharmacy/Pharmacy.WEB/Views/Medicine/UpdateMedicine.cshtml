@@ -1,0 +1,49 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+
+@model Pharmacy.Model.ModelMedicine.UptadeMedicineViewModel
+
+<div class="update-wrapper w-75 m-auto">
+     <div class="page-title mb-3">
+        <h1>Medicine Updating Form</h1>
+    </div>
+    <!--Medicine controllerdaki UpdateMedicine işleminin post methodu-->
+    <form method="post" asp-controller="Medicine" asp-action="UpdateMedicine" class="update-form p-4">
+        @Html.HiddenFor(model => model.Id)
+        <div class="mb-3">
+            <label for="Name" class="form-label">Medicine Name</label>
+            <input name="name" type="text" class="form-control" id="name" aria-describedby="authorizedIdHelp" value="@Model.Name">
+        </div>
+
+        <div class="mb-3">
+            <label for="TicketCode" class="form-label">Medicine Ticket Code</label>
+            <input type="text" name="ticketCode" class="form-control" id="ticketCode" value="@Model.TicketCode">
+        </div>
+
+        <div class="mb-3">
+            <label for="Description" class="form-label">Medicine Description</label>
+            <input type="text" name="description" class="form-control" id="description" value="@Model.Description">
+        </div>
+
+        <div class="mb-3">
+            <label for="Price" class="form-label">Medicine Price</label>
+            <input type="text" name="price" class="form-control" id="price" value="@Model.Price">
+        </div>
+
+        <div class="mb-3">
+            <label for="Stock" class="form-label">Medicine Stock</label>
+            <input type="text" name="stock" class="form-control" id="stock" value="@Model.Stock">
+        </div>
+
+        <div class="mb-3">
+            <label for="Iuser" class="form-label">Medicine IUser</label>
+            <input type="text" name="iuser" class="form-control" id="iuser" value="@Model.Iuser">
+        </div>
+        <div class="button-wrapper d-flex justify-content-end mt-4">
+            <button type="submit" class="btn btn-primary">Update Medicine</button>
+        </div>
+    </form>
+</div>
